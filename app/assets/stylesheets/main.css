@@ -1,0 +1,15 @@
+#sketch{
+        image-rendering: -webkit-optimize-contrast !important;
+        height: 200;
+        width: 200;
+        border: 1px solid gray;
+      }
+      #editor-container{
+        height: 600px;
+      }
+      #code {
+        /*border: 1px solid blue;*/
+        position: relative;
+        height: 100%;
+        width: 100%;
+      }
