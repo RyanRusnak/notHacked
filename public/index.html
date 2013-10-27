@@ -9,13 +9,25 @@
         border: 1px solid gray;
       }
       #editor-container{
+        margin-left: -15px;
+        margin-top: -15px;
+        margin-right: -15px;
         height: 600px;
+      }
+      #editor-panel{
+        height: 700px;
       }
       #code {
         /*border: 1px solid blue;*/
         position: relative;
         height: 100%;
         width: 100%;
+      }
+      .wrapper{
+        /*background-color: #272822;*/
+      }
+      .navbar-inverse .navbar-nav>li>a{
+        margin-top: 20px;
       }
       </style>
     <title>notHacked</title>
@@ -25,6 +37,7 @@
     <link href="bootstrap-3/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
   </head>
   <body>
+    <div class="wrapper">
     <nav class="navbar navbar-inverse" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -34,54 +47,123 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">notHacked</a>
+      <a class="navbar-brand" href="#"><img src="https://s3.amazonaws.com/nothacked/hacked.png" width="200px"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav">
-              <li class="active">
-          <a href="#" onclick="runSketch();" >
-            <span class="glyphicon glyphicon-play"></span>
-            Run
-          </a>
-        </li>
-        <li>
-          <a href="#" onclick="stopSketch()" >
-            <span class="glyphicon glyphicon-stop"></span>
-            Stop
-          </a>
-        </li>
+      <ul class="nav navbar-nav pull-right">
+        <li><a href="#">Courses</a></li>
+        <li><a href="#">Sign Up</a></li>
+        <li><a href="#">Sign In</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </nav>
 
     <div class="container">
+
       <div class="row">
-        <div id="editor-container" class="col-md-6">
-          <div id="code">//sample sketch
-void setup(){
-    size(200, 200, P3D);    
+        <div class="col-md-6">
+          <div id="editor-panel"class="panel panel-default">
+            <div class="panel-heading">
+              <button class="btn" href="#" onclick="runSketch();" >
+                <span class="glyphicon glyphicon-play"></span>
+                Run
+              </button>
+              <button class="btn" href="#" onclick="stopSketch()" >
+                <span class="glyphicon glyphicon-stop"></span>
+                Stop
+              </button>
+            </div>
+            <div class="panel-body">
+                    <div id="editor-container">
+            <div id="code">//sample sketch
+float a = 0.0;
+float rSize;  // rectangle size
+
+void setup() {
+  size(500, 700, P3D);
+  rSize = width / 6;  
+  noStroke();
+  fill(204, 204);
 }
 
-void draw(){
-    noFill();
-    translate(100, 100, 0);
-    rotateX(-PI/6);
-    rotateY(PI/3);
-    box(50);
+void draw() {  
+  background(126);
+  
+  a += 0.005;
+  if(a > TWO_PI) { 
+    a = 0.0; 
+  }
+  
+  translate(width/2, height/2);
+  
+  rotateX(a);
+  rotateY(a * 2.0);
+  fill(255);
+  rect(-rSize, -rSize, rSize*2, rSize*2);
+  
+  rotateX(a * 1.001);
+  rotateY(a * 2.002);
+  fill(0);
+  rect(-rSize, -rSize, rSize*2, rSize*2);
+
 }
 </div>
         <textarea rows="2" class="col-md-12" id="output" readonly="readonly">Done.</textarea>
         </div>
+        </div>
+      </div>
+    </div>
         <div class="col-md-6">
           <div id="sketch-container">
             <canvas id="sketch"></canvas>
           </div>
         </div>
       </div>
-    </div>
+      <!-- START THE FEATURETTES -->
 
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Don't learn to code alone <span class="text-muted">We provide content for both students and teachers.</span></h2>
+          <p class="lead">Sometimes it is easier and more fun to learn in groups. Follow our curriculum and get feedback from teachers. We provide the syllabus and the tools for evaluating the amazing projects you create.</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" src="https://s3.amazonaws.com/nothacked/subl-blur.png" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" src="https://s3.amazonaws.com/nothacked/art1.jpg" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Code Creatively <span class="text-muted">Make art with code.</span></h2>
+          <p class="lead">We concentrate on teaching java through processing.js right in the web. In processing, every data structure and algorithm will be used to create something amazing. Visualize data and create interactive projects right in the web that you can share immediately.</p>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Learn from the best <span class="text-muted">Professional developers a click away.</span></h2>
+          <p class="lead">Guest lecturers to teach the most complex subjects wherever you are.</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" src="https://s3.amazonaws.com/nothacked/art2.png" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
+    </div>
+     </div> <!-- end wrapper -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap-3/dist/js/bootstrap.min.js"></script>
     <script src="processing.js"></script>
@@ -99,6 +181,9 @@ void draw(){
         function stopSketch(){
           switchSketchState(false);
         }
+        function startSketch(){
+          switchSketchState(true);
+        }
         var processingInstance;
         function switchSketchState(on) {
             if (!processingInstance) {
@@ -114,6 +199,6 @@ void draw(){
 
         runSketch();
     </script>
-
+  
   </body>
 </html>
