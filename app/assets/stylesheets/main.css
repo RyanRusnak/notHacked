@@ -5,11 +5,21 @@
         border: 1px solid gray;
       }
       #editor-container{
+        margin-left: -15px;
+        margin-top: -15px;
+        margin-right: -15px;
         height: 600px;
+      }
+      #editor-panel{
+        height: 700px;
       }
       #code {
         /*border: 1px solid blue;*/
         position: relative;
         height: 100%;
         width: 100%;
+      }
+
+      .navbar-inverse .navbar-nav>li>a{
+        margin-top: 20px;
       }

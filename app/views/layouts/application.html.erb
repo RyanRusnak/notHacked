@@ -1,14 +1,85 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>NotHacked</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+  	<%= stylesheet_link_tag    "application", :media => "all" %>
+  	<%= javascript_include_tag "application" %>
+  	<%= csrf_meta_tags %>
+    <title>notHacked</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/bootstrap-3/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+
+    <nav class="navbar navbar-inverse" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src="https://s3.amazonaws.com/nothacked/hacked.png" width="200px"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav pull-right">
+        <li><a href="#">Courses</a></li>
+		<% if user_signed_in? %>
+		  <li><%= link_to current_user.email , student_path(current_user) %> </li>
+		  <li><%= link_to 'Edit profile', edit_user_registration_path %> </li>
+		  <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+		<% else %>
+		  <li><%= link_to "Sign up", new_user_registration_path %> </li>
+		  <li><%= link_to "Login", new_user_session_path %></li>
+		<% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+
+    <div class="container">
 
 <%= yield %>
 
-</body>
+</div>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="/bootstrap-3/dist/js/bootstrap.min.js"></script>
+    <script src="/processing.js"></script>
+    <script src="/tools/processing-helper.js"></script>
+    <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("code");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/java");
+
+        editor.getSession().on('change', function(e) {
+            runSketch();
+        });
+
+        function stopSketch(){
+          switchSketchState(false);
+        }
+        function startSketch(){
+          switchSketchState(true);
+        }
+        var processingInstance;
+        function switchSketchState(on) {
+            if (!processingInstance) {
+                processingInstance = Processing.getInstanceById('sketch');
+            }
+
+            if (on) {
+                processingInstance.loop();  // call Processing loop() function
+            } else {
+                processingInstance.noLoop(); // stop animation, call noLoop()
+            }
+        }
+
+        runSketch();
+    </script>
+  
+  </body>
 </html>
